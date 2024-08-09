@@ -1,0 +1,85 @@
+.backdrop {
+    position: fixed;
+    width: 100vw;
+    height: 95px;
+    left: 0px;
+    top: 0px;
+    background: linear-gradient(180deg, #0A0A0A 0%, rgba(10, 10, 10, 0) 100%);
+    z-index: 10;
+    display: none;
+}
+
+.headerContainer {
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    transition: ease-in-out 0.3s all;
+}
+
+.headerContainerSticky {
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    margin-top: -140px;
+    border-bottom: 1px solid transparent;
+    transition: ease-in-out 0.3s all;
+}
+
+.headerContent {
+    padding: 15px 20px 15px 20px;
+    background-color: var(--main-bg-color);
+    border-radius: 20px;
+    width: calc(100% - 120px);
+    margin-left: 40px;
+    transition: ease-in-out 0.3s all;
+    border: 1px solid transparent;
+}
+
+.headerContentSticky {
+    padding: 15px 20px 15px 20px;
+    background-color: var(--main-bg-color);
+    width: calc(100% - 120px);
+    margin-left: 40px;
+    border-radius: 20px;
+    max-height: 70px;
+    transition: ease-in-out 0.3s all;
+    border: 1px solid var(--border-color);
+}
+
+.logoContainer {
+    margin: auto;
+    max-width: 117px;
+    padding: 20px;
+}
+
+.logo {
+    max-width: 117px;
+}
+
+.headerButtonsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonsLeft {
+    display: flex;
+    gap: 37px;
+    flex-direction: row;
+    margin-top: -5px;
+    font-size: 15px;
+}
+
+.buttonsLeft a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+.buttonsRight {
+    display: flex;
+    gap: 22px;
+    flex-direction: row;
+}
