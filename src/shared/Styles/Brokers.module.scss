@@ -1,0 +1,16 @@
+@keyframes truckLoopAnimation {
+    0% {
+        left: -5%;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+      left: 105%;
+      opacity: 0;
+    }
+  }

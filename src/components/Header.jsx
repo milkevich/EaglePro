@@ -62,7 +62,8 @@ const Header = () => {
     <>
       <div ref={headerRef} style={{ width: '1px', height: '1px' }} />
       <div style={{ width: '100vw', height: '100px', position: 'fixed', background: 'linear-gradient(180deg, var(--main-bg-color) 0%, rgba(10, 10, 10, 0) 100%)', zIndex: 100000, top: 0, left: 0, opacity: position.top < -1 ? 1 : 0, transition: 'ease-in-out 0.5s all'}} />
-      <div style={{position: 'fixed', width: '100%', backgroundColor: position.top < -1 ? 'transparent' : 'var(--main-bg-color)', transition: '0.3s ease-in-out all', zIndex: 1000000000}}>
+      <div style={{position: 'fixed', width: '100%', backgroundColor: position.top < -1 ? 'transparent' : 'var(--main-bg-color)', transition: '0.3s ease-in-out all', zIndex: 1000000000, borderBottom: position.top < -1 ? '1px solid transparent' : '1px solid var(--border-color)'}}>
+        <div style={{margin: 'auto', maxWidth: '1470px'}}>
       <div style={{opacity: logoAnim ? 0 : 1, transition: 'ease-in-out 0.1s all'}} className={s.logoContainer}>
         <img className={s.logo} src={logo} alt="Logo" />
       </div>
@@ -72,12 +73,13 @@ const Header = () => {
             <div style={{display: 'flex', alignItems: 'center'}}>
           <img style={{width: '44px', opacity: logoAnim2 ? 1 : 0, position: 'absolute', transition: 'ease-in-out 0.3s all'}} src={logo} alt="Logo" />
             <div style={{marginLeft: btnsAnim ? '70px' : 0, transition: 'ease-in-out 0.3s all', zIndex: 10000}} className={s.buttonsLeft}>
-              <a href="/Home" style={{ textDecoration: isActive('/Home') ? 'underline' : 'none'}}>Home</a>
-              <a href="/Express" style={{ textDecoration: isActive('/Express') ? 'underline' : 'none'}}>Express</a>
-              <a href="/Trailers" style={{ textDecoration: isActive('/Trailers') ? 'underline' : 'none'}}>Trailers</a>
-              <a href="/Gourmet" style={{ textDecoration: isActive('/Gourmet') ? 'underline' : 'none'}}>Gourmet</a>
-              <a href="/Invest" style={{ textDecoration: isActive('/Invest') ? 'underline' : 'none'}}>Invest</a>
-              <a href="/Brokers" style={{ textDecoration: isActive('/Brokers') ? 'underline' : 'none'}}>Brokers</a>
+              <a href="/home" style={{ textDecoration: isActive('/home') ? 'underline' : 'none'}}>Home</a>
+              <a href="/express" style={{ textDecoration: isActive('/express') ? 'underline' : 'none'}}>Express</a>
+              <a href="/mechanics" style={{ textDecoration: isActive('/mechanics') ? 'underline' : 'none'}}>Mechanics</a>
+              <a href="/trailers" style={{ textDecoration: isActive('/trailers') ? 'underline' : 'none'}}>Trailers</a>
+              <a href="/gourmet" style={{ textDecoration: isActive('/gourmet') ? 'underline' : 'none'}}>Gourmet</a>
+              <a href="/invest" style={{ textDecoration: isActive('/invest') ? 'underline' : 'none'}}>Invest</a>
+              <a href="/brokers" style={{ textDecoration: isActive('/brokers') ? 'underline' : 'none'}}>Brokers</a>
             </div>
             </div>
             <div className={s.buttonsRight}>
@@ -85,6 +87,7 @@ const Header = () => {
                 navigate('/Express')
               }} style={{ width: '149px', height: '44px', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--btn-bg-color)', border: 'none', outline: 'none', borderRadius: 15, color: 'var(--main-color)', fontWeight: 900, cursor: 'pointer' }}>Apply</button>
               <button style={{ width: '44px', height: '44px', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--btn-bg-color)', border: 'none', outline: 'none', borderRadius: 15, cursor: 'pointer' }}><TbWorld color='var(--main-color)' style={{ marginTop: '3px' }} size={22} /></button>
+            </div>
             </div>
           </div>
           </div>

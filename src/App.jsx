@@ -2,6 +2,7 @@ import { Outlet, useMatch, useNavigate } from "react-router-dom";
 import './shared/Styles/Variables.scss'
 import Header from './components/Header'
 import { useEffect, useRef, useState } from 'react';
+import Footer from "./components/Footer";
 
 function App() {
   const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -42,6 +43,7 @@ function App() {
       <div style={{marginTop: position.top < -1 ? '0' : '235px', transition: 'ease-in-out 0.3s all'}}>
         <Outlet />
       </div>
+      <Footer />
     </div>
   )
 }

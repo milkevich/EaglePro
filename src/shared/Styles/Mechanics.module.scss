@@ -1,0 +1,244 @@
+.container {
+}
+
+.contentWrapper {
+  max-width: 1470px;
+  margin: auto;
+}
+
+.header {
+  max-width: 650px;
+  margin-top: -250px;
+  margin-left: 40px;
+  z-index: 10000;
+  position: relative;
+  margin-bottom: 200px;
+  transition: ease-in-out 0.3s all;
+}
+
+.title {
+  font-size: 54px;
+  margin: 0;
+}
+
+.description {
+  margin-top: 10px;
+  opacity: 0.65;
+}
+
+.pricesWrapper {
+  padding: 0px 40px;
+  position: relative;
+  z-index: 10000;
+  transition: ease-in-out 0.3s all;
+}
+
+.pricesHeader {
+  transition: 0.3s ease-in-out all;
+}
+
+.pricesTitle {
+  font-size: 42px;
+}
+
+.pricesDescription {
+  margin-top: -30px;
+  max-width: 400px;
+  opacity: 0.65;
+}
+
+.pricesList {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--border-color);
+  padding: 10px 25px;
+  border-radius: 20px;
+  min-height: 300px;
+  width: 466px;
+  position: relative;
+  transition: 0.3s ease-in-out all;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cardTitle {
+  margin-top: 10px;
+  font-size: 24px;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+}
+
+.cardLogo {
+  width: 30px;
+  height: 100%;
+  margin-top: -5px;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.cardPrice {
+  margin-left: 20px;
+}
+
+.selectButton {
+  position: absolute;
+  bottom: 25px;
+  width: calc(100% - 50px);
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  background-color: var(--btn-bg-color);
+  border-radius: 10px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.locationTitle {
+  margin-top: 0px;
+}
+
+.locationDescription {
+  margin-top: -20px;
+  max-width: 400px;
+  margin-bottom: 20px;
+  color: var(--sec-color);
+}
+
+.locationWrapper {
+  background-color: var(--main-bg-color);
+  padding: 10px 35px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.locationLabel {
+  margin-bottom: -15px;
+  color: var(--sec-color);
+}
+
+.locationStatus {
+  color: #469e4a;
+  font-weight: 800;
+}
+
+.joinTitle {
+  margin-top: 40px;
+}
+
+.joinDescription {
+  color: var(--sec-color);
+  margin-bottom: 20px;
+  margin-top: -20px;
+}
+
+.joinWrapper {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--border-color);
+  padding: 10px 25px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.joinRow {
+  display: flex;
+  justify-content: stretch;
+  gap: 20px;
+}
+
+.joinField {
+  width: 33%;
+}
+
+.joinFieldBottom {
+    width: 50%;
+}
+
+.joinFieldDate {
+  position: relative;
+  width: 33%;
+}
+
+.dateInput {
+  padding: 8.25px;
+  outline: none;
+  background-color: var(--btn-bg-color);
+  color: var(--main-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  width: calc(100% - 20px);
+}
+
+.calendarIcon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: -25px;
+  pointer-events: none;
+}
+
+.arrowIcon {
+  background-color: var(--btn-bg-color);
+  padding-right: 5px;
+  position: absolute;
+  margin-top: 6px;
+  margin-left: -25px;
+  pointer-events: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  z-index: 1000;
+}
+
+.submitWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.submitDescription {
+  color: var(--sec-color);
+}
+
+.submitButton {
+  padding: 10px 40px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--btn-bg-color);
+  color: var(--main-color);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.trustedTitle {
+  margin: 0;
+  padding: 0;
+  margin-top: 40px;
+}
+
+.trustedDescription {
+  color: var(--sec-color);
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+}

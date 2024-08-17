@@ -11,17 +11,19 @@ import Brokers from './screens/Brokers';
 import Express from './screens/Express';
 import Home from './screens/Home';
 import { HeaderProvider } from './contexts/HeaderContext';
+import TrailerOverview from './screens/TrailerOverview';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
-      <Route path='/Home' element={<Home />} />
-      <Route path='/Express' element={<Express />} />
-      <Route path='/Mechanics' element={<Mechanics />} />
-      <Route path='/Trailers' element={<Trailers />} />
-      <Route path='/Gourmet' element={<Gourmet />} />
-      <Route path='/Invest' element={<Invest />} />
-      <Route path='/Brokers' element={<Brokers />} />
+      <Route path='/home' element={<Home />} />
+      <Route path='/express' element={<Express />} />
+      <Route path='/mechanics' element={<Mechanics />} />
+      <Route path='/trailers' element={<Trailers />} />
+      <Route path='/gourmet' element={<Gourmet />} />
+      <Route path='/invest' element={<Invest />} />
+      <Route path='/brokers' element={<Brokers />} />
+      <Route path='/trailers/:trailerId' element={<TrailerOverview />} />
     </Route>
   )
 );
