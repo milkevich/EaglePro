@@ -1,6 +1,6 @@
 @keyframes truckLoopAnimation {
     0% {
-        left: -5%;
+        left: -14%;
         opacity: 0;
     }
     1% {
@@ -14,3 +14,12 @@
       opacity: 0;
     }
   }
+
+  .locationSuggestion {
+    padding: 10px 10px;
+    cursor: pointer;
+    margin-top: 2px;
+    color: var(--main-color);
+    border-top: 1px solid var(--border-color);
+  }
+                          
