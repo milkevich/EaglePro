@@ -22,4 +22,26 @@
     color: var(--main-color);
     border-top: 1px solid var(--border-color);
   }
-                          
+
+  .trustedTitle {
+    margin: 0;
+    padding: 0;
+    margin-top: 40px;
+  }
+  
+  .trustedDescription {
+    color: var(--sec-color);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+                        
+  @media only screen and (max-width: 550px) {
+    .trustedTitle {
+      font-size: 24px;
+    }
+
+    .trustedDescription {
+      font-size: 14px;
+    }
+  }

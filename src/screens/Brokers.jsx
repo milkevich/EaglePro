@@ -5,10 +5,10 @@ import { HeaderContext } from '../contexts/HeaderContext';
 import Review from '../components/Review';
 import { FaTruck } from "react-icons/fa";
 import s from '../shared/Styles/Brokers.module.scss';
-import { FaRegCalendar } from "react-icons/fa6";
 import { MdOutlineRemoveCircleOutline } from "react-icons/md";
 import axios from 'axios';
 import { getDistance } from 'geolib';
+import { useNavigate } from 'react-router-dom';
 
 const Brokers = () => {
   const { position } = useContext(HeaderContext);
@@ -30,7 +30,40 @@ const Brokers = () => {
   const [selectedType, setSelectedType] = useState('');
   const [vehicles, setVehicles] = useState([]);
   const [estimatedCost, setEstimatedCost] = useState(null);
-  const [costBreakdown, setCostBreakdown] = useState(null)
+  const [costBreakdown, setCostBreakdown] = useState(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isSmallScreen2, setIsSmallScreen2] = useState(false);
+  const [isSmallScreen3, setIsSmallScreen3] = useState(false);
+  const [isSmallScreen4, setIsSmallScreen4] = useState(false);
+  const [isSmallScreen5, setIsSmallScreen5] = useState(false);
+  const [isSmallScreen6, setIsSmallScreen6] = useState(false);
+  const [isSmallScreen7, setIsSmallScreen7] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 600);
+      setIsSmallScreen2(window.innerWidth <= 640);
+      setIsSmallScreen3(window.innerWidth <= 1200);
+      setIsSmallScreen4(window.innerWidth <= 1100);
+      setIsSmallScreen5(window.innerWidth <= 550);
+      setIsSmallScreen6(window.innerWidth <= 475);
+      setIsSmallScreen7(window.innerWidth <= 420);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('Initial Vehicles:', vehicles);
+  }, []);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -99,16 +132,17 @@ const Brokers = () => {
 
   const calculateDiscountedPrice = (basePrice, vehicleIndex) => {
     if (vehicleIndex === 1) {
-      return basePrice * 0.85; // 15% discount
+      return basePrice * 0.85;
     } else if (vehicleIndex === 2) {
-      return basePrice * 0.75; // 25% discount
+      return basePrice * 0.75;
     } else {
       return basePrice;
     }
   };
 
   const addVehicle = () => {
-    if (vehicles.length >= 3) return; // Limit to 3 vehicles
+    console.log('Adding vehicle');
+    if (Array.isArray(vehicles) && vehicles.length >= 3) return;
     if (selectedType) {
       let basePricePerMile;
       switch (selectedType) {
@@ -150,7 +184,6 @@ const Brokers = () => {
   const removeVehicle = (index) => {
     setVehicles((prevVehicles) => {
       const updatedVehicles = prevVehicles.filter((_, i) => i !== index);
-      // Reapply discounts after a vehicle is removed
       return updatedVehicles.map((vehicle, i) => ({
         ...vehicle,
         discountedPricePerMile: calculateDiscountedPrice(parseFloat(vehicle.basePricePerMile.slice(1)), i) !== parseFloat(vehicle.basePricePerMile.slice(1))
@@ -184,39 +217,37 @@ const Brokers = () => {
     setCostBreakdown(breakdown);
   };
 
-  // Automatically calculate the cost whenever vehicles state changes
   useEffect(() => {
     calculateEstimatedCost();
   }, [vehicles, distance]);
 
+  const navigateToTransportPage = () => {
+    console.log('Navigating to transport page');
+    if (!Array.isArray(vehicles) || vehicles.length === 0 || !distance) return;
+    const carNames = vehicles.map(vehicle => vehicle.type).join('-');
+    const url = `/brokers/transport/${carNames}-${distance}mil`;
+
+    localStorage.setItem('transportData', JSON.stringify({ vehicles, distance, pickupCoords, pickupLocation, destinationCoords, destination, estimatedCost }));
+    navigate(url);
+  };
+
+  const marginMeasurement = () => {
+    return window.innerHeight / 100 * 40 > 800 ? '-700px' : '-40vh';
+  };
 
   return (
     <div>
       <ImgBgFade img={roadImg} />
       <div style={{ maxWidth: '1470px', margin: 'auto' }}>
-        <div
-          style={{
-            maxWidth: '550px',
-            marginTop: '-250px',
-            marginLeft: '40px',
-            zIndex: 10000,
-            position: 'relative',
-            marginBottom: '200px',
-            opacity: position.top < -1 ? 0 : 1,
-            transition: 'ease-in-out 0.3s all',
-          }}
-        >
-          <h1 style={{ fontSize: '54px', margin: 0 }}>EaglePro Brokers</h1>
-          <p style={{ marginTop: '10px', opacity: 0.65 }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            veniam minima, fuga tenetur sint
-          </p>
+        <div style={{ maxWidth: '450px', marginTop: isSmallScreen ? isSmallScreen6 ? '-150px' : '-200px' : '-250px', marginLeft: isSmallScreen ? '20px' : '40px', zIndex: 10000, position: "relative", marginBottom: isSmallScreen ? isSmallScreen6 ? '100px' : '150px' : '200px', opacity: position.top < -1 ? 0 : 1, transition: 'ease-in-out 0.3s all' }}>
+          <h1 style={{ fontSize: isSmallScreen ? '32px' : '54px', margin: 0, }}>EaglePro - Brokers</h1>
+          <p style={{ marginTop: isSmallScreen6 ? '0px' : '10px', opacity: 0.65, fontSize: isSmallScreen ? '16px' : '18px' }}>{isSmallScreen6 ? 'Lorem ipsum dolor amet consectetur dolor.' : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, veniam minima, fuga tenetur sint'}</p>
         </div>
         <div
           style={{
-            padding: '0px 40px',
+            padding: isSmallScreen ? '0px 20px' : '0px 40px',
             position: 'relative',
-            marginTop: position.top < -1 ? '-350px' : '0px',
+            marginTop: position.top < -1 ? isSmallScreen6 ? '-35vh' : marginMeasurement() : '-60px',
             zIndex: 10000,
             transition: 'ease-in-out 0.3s all',
           }}
@@ -229,22 +260,22 @@ const Brokers = () => {
               marginTop: '20px',
               marginBottom: '40px',
               transition: '0.3s ease-in-out',
-              display: 'flex',
+              display: isSmallScreen4 && vehicles.length > 0 ? 'block' : 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}
           >
-            <div style={{ width: vehicles.length > 0 ? '60%' : '100%', padding: '25px', margin: '0', borderRight: vehicles.length > 0 ? '1px solid var(--border-color)' : '1px solid rgba(0, 0, 0, 0)', transition: 'ease-in-out 0.3s all' }}>
+            <div style={{ width: Array.isArray(vehicles) && vehicles.length > 0 ? isSmallScreen4 ? 'calc(100% - 45px)' : '60%' : '100%', padding: '25px', margin: '0', borderRight: Array.isArray(vehicles) && vehicles.length > 0 ? isSmallScreen4 ? '1px solid rgba(0, 0, 0, 0)' : '1px solid var(--border-color)' : '1px solid rgba(0, 0, 0, 0)', transition: 'ease-in-out 0.3s all' }}>
               <h3 style={{ margin: 0, marginTop: '-5px' }}>
                 Calculate transportation
               </h3>
               <p style={{ color: 'var(--sec-color)', margin: 0 }}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                {isSmallScreen5 ? 'Lorem ipsum, dolor sit consectetur.' : 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.'}
               </p>
               <br />
               <div
                 style={{
-                  display: 'flex',
+                  display: isSmallScreen7 ? 'block' : 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   gap: '20px',
@@ -258,7 +289,7 @@ const Brokers = () => {
                       color: 'var(--sec-color)',
                     }}
                   >
-                    Enter the pick-up location
+                    {isSmallScreen2 ? isSmallScreen6 ? 'Pick-up' : 'Pick-up location' : 'Enter the pick-up location'}
                   </p>
                   <input
                     style={{
@@ -294,7 +325,7 @@ const Brokers = () => {
                     }}
                     onFocus={() => setActiveInput('pickup')}
                   />
-                  {activeInput === 'pickup' && suggestions.length > 0 && (
+                  {activeInput === 'pickup' && Array.isArray(suggestions) && suggestions.length > 0 && (
                     <div style={{ listStyleType: 'none', marginTop: '-8px', position: 'absolute', width: '100%', backgroundColor: 'var(--main-bg-color)', zIndex: 100000, borderRadius: '0px 0px 10px 10px', border: '1px solid var(--border-color)', borderTop: 'none' }}>
                       {suggestions.map((suggestion, index) => (
                         <li
@@ -315,64 +346,73 @@ const Brokers = () => {
                     </div>
                   )}
                 </div>
-                <div
-                  style={{
-                    width: expandAnim ? 'calc(100% - 120px)' : '3%',
-                    marginTop: expandAnimDelay ? '45px' : '25px',
-                    position: 'relative',
-                    transition: '0.3s ease-in-out all',
-                  }}
-                >
+                {!isSmallScreen7 &&
                   <div
                     style={{
-                      width: '100%',
+                      width: expandAnim ? 'calc(100% - 120px)' : '3%',
+                      marginTop: expandAnimDelay ? '45px' : '25px',
                       position: 'relative',
-                      height: '20px',
                       transition: '0.3s ease-in-out all',
-                      overflow: 'hidden'
                     }}
                   >
-                    <FaTruck
-                      size={21}
+                    <div
                       style={{
-                        position: 'absolute',
-                        bottom: expandAnimDelay ? 0 : -30,
-                        transition: destinationAnim
-                          ? exitAnim
-                            ? loopAnim
-                              ? '4s ease-in-out all'
-                              : '0.3s ease-in-out all'
-                            : '3s ease-in-out all'
-                          : '0.3s ease-in-out all',
-                        color: 'var(--sec-color)',
-                        left: destinationAnim
-                          ? exitAnim
-                            ? '100%'
-                            : 'calc(100% - 25px)'
-                          : !loopAnimCheck
-                            ? !noDestination
-                              ? '-5%'
-                              : 0
-                            : 0,
-                        animation: loopAnim ? `${s.truckLoopAnimation} 4s linear` : 'none',
+                        width: '100%',
+                        position: 'relative',
+                        height: '20px',
+                        transition: '0.3s ease-in-out all',
+                        overflow: 'hidden'
                       }}
-                      onAnimationEnd={handleAnimationEnd}
-                    />
-                  </div>
+                    >
+                      <FaTruck
+                        size={21}
+                        style={{
+                          position: 'absolute',
+                          bottom: expandAnimDelay ? 0 : -30,
+                          transition: destinationAnim
+                            ? exitAnim
+                              ? loopAnim
+                                ? '4s ease-in-out all'
+                                : '0.3s ease-in-out all'
+                              : '3s ease-in-out all'
+                            : '0.3s ease-in-out all',
+                          color: 'var(--sec-color)',
+                          left: destinationAnim
+                            ? exitAnim
+                              ? '100%'
+                              : 'calc(100% - 25px)'
+                            : !loopAnimCheck
+                              ? !noDestination
+                                ? '-5%'
+                                : 0
+                              : 0,
+                          animation: loopAnim ? `${s.truckLoopAnimation} 4s linear` : 'none',
+                        }}
+                        onAnimationEnd={handleAnimationEnd}
+                      />
+                    </div>
 
-                  <div
-                    style={{
-                      height: expandAnimDelay ? '1px' : '3px',
-                      width: '100%',
-                      backgroundColor: 'var(--border-color)',
-                      borderRadius: '10px',
-                      transition: '0.3s ease-in-out all',
-                    }}
-                  />
-                  <p style={{ textAlign: 'center', margin: 0, fontSize: '14px', opacity: distance ? 1 : 0, position: 'absolute', width: '100%', color: 'var(--sec-color)', transition: 'ease-in-out 0.3s all' }}>
-                    {distance} miles
-                  </p>
-                </div>
+                    <div
+                      style={{
+                        height: expandAnimDelay ? '1px' : '3px',
+                        width: '100%',
+                        backgroundColor: 'var(--border-color)',
+                        borderRadius: '10px',
+                        transition: '0.3s ease-in-out all',
+                      }}
+                    />
+                    <p style={{ textAlign: 'center', margin: 0, fontSize: '14px', opacity: distance ? 1 : 0, position: 'absolute', width: '100%', color: 'var(--sec-color)', transition: 'ease-in-out 0.3s all' }}>
+                      {distance} miles
+                    </p>
+                  </div>
+                }
+                {isSmallScreen7 && distance &&
+                  <>
+                    <div style={{ height: '1px', width: 'calc(50% - 95px)', backgroundColor: 'var(--border-color)', position: 'absolute', marginTop: '29px', zIndex: 1 }} />
+                    <p style={{ textAlign: 'center', backgroundColor: 'var(--main-bg-color)', zIndex: 10, color: 'var(--sec-color)' }}>{distance} miles</p>
+                    <div style={{ height: '1px', width: 'calc(50% - 95px)', backgroundColor: 'var(--border-color)', position: 'absolute', marginTop: '-27px', zIndex: 1, right: 45 }} />
+                  </>
+                }
                 <div
                   style={{ width: '100%', transition: '0.3s ease-in-out all', position: 'relative' }}
                 >
@@ -383,7 +423,7 @@ const Brokers = () => {
                       color: 'var(--sec-color)',
                     }}
                   >
-                    Enter the destination
+                    {isSmallScreen2 ? isSmallScreen6 ? 'Destination' : 'Destination location' : 'Enter the destination'}
                   </p>
                   <input
                     style={{
@@ -415,7 +455,7 @@ const Brokers = () => {
                     }}
                     onFocus={() => setActiveInput('destination')}
                   />
-                  {activeInput === 'destination' && suggestions.length > 0 && (
+                  {activeInput === 'destination' && Array.isArray(suggestions) && suggestions.length > 0 && (
                     <div style={{ listStyleType: 'none', marginTop: '-8px', position: 'absolute', width: '100%', backgroundColor: 'var(--main-bg-color)', zIndex: 100000, borderRadius: '0px 0px 10px 10px', border: '1px solid var(--border-color)', borderTop: 'none' }}>
                       {suggestions.map((suggestion, index) => (
                         <li
@@ -515,55 +555,53 @@ const Brokers = () => {
                     </p>
                   </div>
                 </div>
-                {/* <div style={{ position: 'relative' }}>
-                <p style={{ marginBottom: '5px', marginTop: '-24px', fontSize: '14px', color: 'var(--sec-color)' }}>Pick-up date</p>
-                <FaRegCalendar style={{ position: 'absolute', right: '20px', top: '21px', color: 'var(--sec-color)', pointerEvents: 'none', }} />
-                <input style={{ height: '54px', marginBottom: '-21px', minWidth: '200px', paddingLeft: '15px', paddingRight: '15px', outline: 'none', border: '1px solid var(--border-color)', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)', color: 'var(--main-color)' }} type="date" />
-              </div> */}
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', gap: '20px' }}>
                 <button
                   onClick={addVehicle}
-                  disabled={vehicles.length >= 3}
+                  disabled={Array.isArray(vehicles) && vehicles.length >= 3}
                   style={{
                     width: '100%',
                     padding: '10px',
                     outline: 'none',
-                    border: vehicles.length >= 1 ? '1px solid var(--border-color)' : '1px solid var(--btn-bg-color)',
-                    backgroundColor: vehicles.length >= 1 ? 'var(--main-bg-color)' : 'var(--btn-bg-color)',
+                    border: Array.isArray(vehicles) && vehicles.length >= 1 ? '1px solid var(--border-color)' : '1px solid var(--btn-bg-color)',
+                    backgroundColor: Array.isArray(vehicles) && vehicles.length >= 1 ? 'var(--main-bg-color)' : 'var(--btn-bg-color)',
                     borderRadius: '10px',
                     color: 'var(--main-color)',
-                    cursor: vehicles.length >= 3 ? 'not-allowed' : 'pointer',
-                    display: vehicles.length >= 3 ? 'none' : 'block',
+                    cursor: Array.isArray(vehicles) && vehicles.length >= 3 ? 'not-allowed' : 'pointer',
+                    display: Array.isArray(vehicles) && vehicles.length >= 3 ? 'none' : 'block',
                     height: '46px'
                   }}
                 >
-                  {vehicles.length >= 1 ? 'Add another vehicle' : 'Add a vehicle'}
+                  {Array.isArray(vehicles) && !isSmallScreen6 && vehicles.length >= 1 ? 'Add another vehicle' : 'Add a vehicle'}
                   <span>
-                    {vehicles.length === 1 ? ' -15%' : vehicles.length === 2 ? ' -25%' : ''}
+                    {Array.isArray(vehicles) && vehicles.length === 1 ? ' -15%' : vehicles?.length === 2 ? ' -25%' : ''}
                   </span>
                 </button>
-                {vehicles.length >= 1 && (
-                  <button
-                    onClick={calculateEstimatedCost}
-                    style={{
-                      width: '100%',
-                      padding: '10px',
-                      outline: 'none',
-                      border: 'none',
-                      backgroundColor: 'var(--btn-bg-color)',
-                      borderRadius: '10px',
-                      color: 'var(--main-color)',
-                      height: '46px'
-                    }}
-                  >
-                    Transport Now!
-                  </button>
+                {Array.isArray(vehicles) && vehicles.length >= 1 && (
+                  <div style={{ position: 'relative', width: '100%' }}>
+                    <button
+                      onClick={navigateToTransportPage}
+                      style={{
+                        width: '100%',
+                        padding: '10px',
+                        outline: 'none',
+                        border: 'none',
+                        backgroundColor: 'var(--btn-bg-color)',
+                        borderRadius: '10px',
+                        color: 'var(--main-color)',
+                        height: '46px',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {isSmallScreen6 ? 'Transport' : 'Transport Now!'}
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
-            <div style={{ width: vehicles.length > 0 ? '40%' : '0%', padding: '0', margin: '0', marginTop: '0px', transition: 'ease-in-out 0.3s all', overflow: 'hidden', position: 'relative' }}>
-              {vehicles.map((vehicle, index) => (
+            <div style={{ width: Array.isArray(vehicles) && vehicles.length > 0 ? isSmallScreen3 ? isSmallScreen4 ? '100%' : '50%' : '40%' : '0%', padding: '0', margin: '0', marginTop: '0px', transition: 'ease-in-out 0.3s all', overflow: 'hidden', position: 'relative' }}>
+              {Array.isArray(vehicles) && vehicles.map((vehicle, index) => (
                 <div
                   key={index}
                   style={{
@@ -571,8 +609,8 @@ const Brokers = () => {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '10px 20px',
-                    borderBottom: '1px solid var(--border-color)',
+                    padding: isSmallScreen4 ? '0px 20px' : '10px 20px',
+                    borderBottom: isSmallScreen4 ? '1px solid rgba(0, 0, 0, 0)' : '1px solid var(--border-color)',
                     transition: '0.3s ease-in-out all',
                     height: 'auto',
                     overflow: 'hidden',
@@ -582,12 +620,16 @@ const Brokers = () => {
                     <p>
                       - <strong>{vehicle.type === 'suv' ? vehicle.type.toUpperCase() : vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1)}</strong>{' '}
                       <span style={{ fontSize: '14px', color: 'var(--sec-color)' }}>
-                        {vehicle.discountedPricePerMile && (
+                        {vehicle.discountedPricePerMile && !isSmallScreen5 && (
                           <span style={{ textDecoration: 'line-through', marginRight: '5px' }}>
                             {vehicle.basePricePerMile}
                           </span>
                         )}
-                        {vehicle.discountedPricePerMile ? vehicle.discountedPricePerMile : vehicle.basePricePerMile}
+                        {!isSmallScreen7 &&
+                          <>
+                            {vehicle.discountedPricePerMile ? vehicle.discountedPricePerMile : vehicle.basePricePerMile}
+                          </>
+                        }
                       </span>
                     </p>
                   </div>
@@ -597,7 +639,6 @@ const Brokers = () => {
                       style={{
                         height: '36px',
                         marginBottom: '0',
-                        minWidth: '170px',
                         paddingLeft: '15px',
                         paddingRight: '15px',
                         outline: 'none',
@@ -608,7 +649,7 @@ const Brokers = () => {
                         cursor: 'pointer',
                       }}
                     >
-                      {vehicle.covered ? '- $99 Remove Coverage' : '+ $99 Add Coverage'}
+                      {vehicle.covered ? '- $99 Coverage' : '+ $99 Coverage'}
                     </button>
                     <button
                       onClick={() => removeVehicle(index)}
@@ -631,26 +672,29 @@ const Brokers = () => {
                   </div>
                 </div>
               ))}
+              <div style={{ height: isSmallScreen4 && vehicles.length == 3 ? '170px' : vehicles.length == 2 ? '130px' : vehicles.length == 1 ? '100px' : '0px' }} />
               {costBreakdown && (
-                <div style={{ marginTop: '5px', color: 'var(--main-color)', textAlign: 'left', position: 'absolute', width: '100%', bottom: 10, borderTop: vehicles.length === 3 ? 'none' : '1px solid var(--border-color)', paddingTop: vehicles.length === 3 ? '0' : '6px' }}>
+                <div style={{ marginTop: '5px', color: 'var(--main-color)', textAlign: 'left', position: 'absolute', width: '100%', bottom: 10, borderTop: Array.isArray(vehicles) && vehicles.length === 3 ? 'none' : '1px solid var(--border-color)', paddingTop: Array.isArray(vehicles) && vehicles.length === 3 ? '0' : '6px' }}>
                   <div style={{ marginLeft: '20px' }}>
                     {costBreakdown.map((item, index) => (
-                      <div style={{ margin: '2px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} key={index}>
-                        <p style={{margin: vehicles.length === 3 ? '3px' : 0, color: 'var(--sec-color)'}}>{item.vehicleType}:</p>
-                        <p style={{margin: 0, marginRight:'20px'}}>${item.vehicleCost} {item.coverageCost && (
-                          <span> + Coverage: ${item.coverageCost}</span>
+                      <div style={{ margin: '2px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} key={index}>
+                        <p style={{ margin: vehicles.length === 3 ? '3px' : 0, color: 'var(--sec-color)' }}>{item.vehicleType}:</p>
+                        <p style={{ margin: 0, marginRight: '20px' }}>${item.vehicleCost} {item.coverageCost && (
+                          <span> + {isSmallScreen6 ? `Covered` : `Coverage: ${item.coverageCost}`}</span>
                         )}</p>
                       </div>
                     ))}
                   </div>
-                  <div style={{ padding: '7px 20px 0px 20px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '10px', borderTop: '1px solid var(--border-color)'}}>
-                  <p style={{margin: 0}}>Total <span style={{color: 'var(--sec-color)'}}>(est.)</span></p>
-                  <p style={{margin: 0}}>${estimatedCost}</p>
+                  <div style={{ padding: '7px 20px 0px 20px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '10px', borderTop: '1px solid var(--border-color)' }}>
+                    <p style={{ margin: 0 }}>Total <span style={{ color: 'var(--sec-color)' }}>(est.)</span></p>
+                    <p style={{ margin: 0 }}>${estimatedCost}</p>
                   </div>
                 </div>
               )}
             </div>
           </div>
+          <h1 className={s.trustedTitle}>Trusted Perspectives</h1>
+          <p className={s.trustedDescription}>{isSmallScreen5 ? 'Lorem ipsum dolor sit amet consectetur' : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit'}</p>
           <Review />
         </div>
       </div>

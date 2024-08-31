@@ -1,6 +1,3 @@
-.container {
-}
-
 .contentWrapper {
   max-width: 1470px;
   margin: auto;
@@ -241,4 +238,73 @@
   margin: 0;
   padding: 0;
   margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .pricesList {
+    display: grid;
+  }
+
+  .card {
+    width: calc(100% - 50px);
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 14px;
+    padding: 0px 40px 0px 0px;
+    margin-top: 0px;
+  }
+
+  .header {
+    margin-bottom: 200px;
+  }
+
+  .pricesHeader {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .pricesWrapper {
+    padding: 0px 20px;
+  }
+
+  .header {
+    margin-left: 20px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .trustedTitle {
+    font-size: 24px;
+  }
+
+  .trustedDescription {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+
+  .joinTitle {
+    font-size: 24px;
+  }
+
+  .joinDescription {
+    font-size: 14px;
+    margin-top: -15px;
+  }
+
+  .locationTitle {
+    font-size: 24px;
+  }
+
+  .locationDescription {
+    font-size: 14px;
+    margin-top: -15px;
+  }
 }

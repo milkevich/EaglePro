@@ -78,7 +78,7 @@ const Trailers = () => {
             ))}
           </div>
           <h1 className={s.trustedTitle}>Trusted Perspectives</h1>
-          <p className={s.trustedDescription}>Lorem ipsum dolor sit amet consectetur, adipisicing elit</p>
+          <p className={s.trustedDescription}>Lorem ipsum dolor sit amet consectetur, adipis.</p>
           <Review />
         </div>
       </div>

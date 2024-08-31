@@ -81,3 +81,47 @@
     gap: 22px;
     flex-direction: row;
 }
+
+.burgerMenu {
+    display: none;
+}
+
+@media only screen and (max-width: 1050px) {
+
+    .applyBtn {
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 850px) {
+    .buttonsLeft {
+        display: none;
+    }
+
+    .burgerMenu {
+        display: block;
+    }
+
+    .applyBtn {
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .headerContainerSticky {
+        padding: 0;
+        margin-left: 0;
+    }
+
+    .headerContent {
+        margin-left: 20px;
+        width: calc(100% - 80px);
+    }
+
+    .headerContentSticky {
+        margin-left: 20px;
+        width: calc(100% - 80px);
+    }
+}

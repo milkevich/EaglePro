@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import mechanicsImg from '../assets/bilaldesigner-attachments/mechanics.png'
 import ImgBgFade from '../components/ImgBgFade'
 import { HeaderContext } from '../contexts/HeaderContext'
@@ -12,19 +12,38 @@ import s from '../shared/Styles/Mechanics.module.scss'
 
 const Mechanics = () => {
   const { position } = useContext(HeaderContext)
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isSmallScreen2, setIsSmallScreen2] = useState(false);
+  const [isSmallScreen3, setIsSmallScreen3] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 1000);
+      setIsSmallScreen2(window.innerWidth <= 515)
+      setIsSmallScreen3(window.innerWidth <= 420)
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className={s.container}>
       <ImgBgFade img={mechanicsImg} />
       <div className={s.contentWrapper}>
-        <div 
+        <div
           className={s.header}
           style={{ opacity: position.top < -1 ? 0 : 1 }}
         >
           <h1 className={s.title}>EaglePro Mechanics</h1>
           <p className={s.description}>Наш сервисный центр обслуживает траки, которые не принадлежат нашей компании. Мы рады предложить высокий уровень сервиса и профессионализма независимо от сотрудничества с нами.</p>
         </div>
-        <div 
+        <div
           className={s.pricesWrapper}
           style={{ marginTop: position.top < -1 ? '-350px' : '-135px' }}
         >
@@ -66,7 +85,7 @@ const Mechanics = () => {
             <div className={s.card}>
               <div className={s.cardHeader}>
                 <h3 className={s.cardTitle}>Ford F-350</h3>
-                <img src={fordLogo} style={{width: '55px'}} className={s.cardLogo} />
+                <img src={fordLogo} style={{ width: '55px' }} className={s.cardLogo} />
               </div>
               <div className={s.cardRow}>
                 <p>- Oil change</p>
@@ -94,8 +113,8 @@ const Mechanics = () => {
               </div>
             </div>
             <div className={s.card}>
-            <div className={s.cardHeader}>
-              <h3 className={s.cardTitle}>Trailer</h3>
+              <div className={s.cardHeader}>
+                <h3 className={s.cardTitle}>Trailer</h3>
               </div>
               <div className={s.cardRow}>
                 <p>- Change brake and bearing set 7K</p>
@@ -124,61 +143,115 @@ const Mechanics = () => {
             </div>
           </div>
           <h1 className={s.locationTitle}>Where & When</h1>
-          <p className={s.locationDescription}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          <div className={s.locationWrapper}>
-            <div>
-              <p className={s.locationLabel}>Working hours</p>
-              <p className={s.locationStatus}>Open</p>
+          <p className={s.locationDescription}>Lorem ipsum dolor sit amet consectetur.</p>
+          {!isSmallScreen &&
+            <div className={s.locationWrapper}>
+              <div>
+                <p className={s.locationLabel}>Working hours</p>
+                <p className={s.locationStatus}>Open</p>
+              </div>
+              <div>
+                <p className={s.locationLabel}>Mon - Fri</p>
+                <p>NN:NN am - NN:NN pm</p>
+              </div>
+              <div>
+                <p className={s.locationLabel}>Location</p>
+                <p>419 Industrial Dr, North Wales, PA</p>
+              </div>
+              <div>
+                <p className={s.locationLabel}>In Construction</p>
+                <p>4 Larwin Rd, Cherry Hill, NJ</p>
+              </div>
             </div>
-            <div>
-              <p className={s.locationLabel}>Mon - Fri</p>
-              <p>NN:NN am - NN:NN pm</p>
+          }
+          {isSmallScreen && !isSmallScreen2 &&
+            <div style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', padding: '5px 25px', borderRadius: '20px', backgroundColor: 'var(--main-bg-color)', border: '1px solid var(--border-color)' }}>
+              <div>
+                <div>
+                  <p className={s.locationLabel}>Working hours</p>
+                  <p className={s.locationStatus}>Open</p>
+                </div>
+                <div style={{ marginTop: '40px' }}>
+                  <p className={s.locationLabel}>Location</p>
+                  <p>419 Industrial Dr, North Wales, PA</p>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <p className={s.locationLabel}>Mon - Fri</p>
+                  <p>NN:NN am - NN:NN pm</p>
+                </div>
+                <div style={{ marginTop: '40px' }}>
+                  <p className={s.locationLabel}>In Construction</p>
+                  <p>4 Larwin Rd, Cherry Hill, NJ</p>
+                </div>
+              </div>
+              <div style={{ position: 'absolute', height: '1px', width: 'calc(100% - 50px)', backgroundColor: 'var(--border-color)', top: '90px' }} />
             </div>
-            <div>
-              <p className={s.locationLabel}>Location</p>
-              <p>419 Industrial Dr, North Wales, PA</p>
+          }
+          {isSmallScreen2 &&
+            <div style={{ display: 'block', justifyContent: 'space-between', position: 'relative', padding: '5px 25px', borderRadius: '20px', backgroundColor: 'var(--main-bg-color)', border: '1px solid var(--border-color)' }}>
+              <div style={{display: isSmallScreen3 ? 'block' : 'flex', width: '100%', justifyContent: 'space-between'}}>
+                <div>
+                  <p className={s.locationLabel}>Working hours</p>
+                  <p className={s.locationStatus}>Open</p>
+                </div>
+                <div>
+                  <p className={s.locationLabel}>Mon - Fri</p>
+                  <p>NN:NN am - NN:NN pm</p>
+                </div>
+              </div>
+              <div style={{display: 'block', marginTop: isSmallScreen3 ? '40px' : ''}}>
+                <div>
+                  <p className={s.locationLabel}>Location</p>
+                  <p>419 Industrial Dr, North Wales, PA</p>
+                </div>
+                <div>
+                  <p className={s.locationLabel}>In Construction</p>
+                  <p>4 Larwin Rd, Cherry Hill, NJ</p>
+                </div>
+              </div>
+              <div style={{ position: 'absolute', height: '1px', width: 'calc(100% - 50px)', backgroundColor: 'var(--border-color)', top: isSmallScreen3 ? '155px' : '90px' }} />
             </div>
-            <div>
-              <p className={s.locationLabel}>In Construction</p>
-              <p>4 Larwin Rd, Cherry Hill, NJ</p>
-            </div>
-          </div>
+          }
           <h1 className={s.joinTitle}>Join the Team</h1>
-          <p className={s.joinDescription}>Lorem ipsum dolor sit amet consectetur, adipisicing elit</p>
-          <div className={s.joinWrapper}>
-            <div className={s.joinRow}>
-              <div className={s.joinField}>
-                <p>First Name</p>
+          <p className={s.joinDescription}>Lorem ipsum dolor sit amet consectetur, adipis.</p>
+          <div style={{ backgroundColor: 'var(--main-bg-color)', border: '1px solid var(--border-color)', padding: '10px 25px', borderRadius: 20, marginTop: '20px' }}>
+            <h3 style={{margin: 0, marginTop: '5px'}}>Please fill out the fields below</h3>
+            <p style={{margin: 0, color: 'var(--sec-color)'}}>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            <div style={{ display: isSmallScreen ? 'block' : 'flex', justifyContent: 'stretch', gap: '20px', width: 'calc(100% - 20px)' }}>
+              <div style={{ width: isSmallScreen ? 'calc(100% + 20px)' : '100%' }}>
+                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>First Name</p>
                 <Input def={true} placeholder='Ex. John' />
               </div>
-              <div className={s.joinField}>
-                <p>Last Name</p>
+              <div style={{ width: isSmallScreen ? 'calc(100% + 20px)' : '100%' }}>
+                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Last Name</p>
                 <Input def={true} placeholder='Ex. Doe' />
               </div>
-              <div className={s.joinFieldDate}>
-                <p>Date of birth</p>
-                <input type="date" className={s.dateInput} />
-                <FaRegCalendar color='var(--sec-color)' size={14} className={s.calendarIcon} />
+              <div style={{width: '100%', position: 'relative'}}>
+                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Date of birth</p>
+                <input type="date" style={{ padding: 19, outline: 'none', backgroundColor: "var(--main-bg-color)", color: "var(--main-color)", border: "1px solid var(--border-color)", borderRadius: 10, width: 'calc(100% - 20px)'}} />
+                <FaRegCalendar color='var(--sec-color)' size={14} style={{ position: 'absolute', pointerEvents: 'none', right: 0, bottom: 23}} />
               </div>
             </div>
-            <div className={s.joinRow}>
-              <div className={s.joinFieldBottom}>
-                <p>Working experience</p>
+            <div style={{ display: isSmallScreen3 ? 'block' : 'flex', justifyContent: 'stretch', gap: '20px' }}>
+              <div style={{ width: isSmallScreen3 ? '100%' : '50%' }}>
+                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Working experience</p>
                 <Input select={true} placeholder='Ex. John' />
-                <IoIosArrowDown color='var(--sec-color)' className={s.arrowIcon} />
+                <IoIosArrowDown color='var(--sec-color)' style={{ backgroundColor: 'var(--main-bg-color)', paddingRight: '15px', position: 'absolute', marginTop: '20px', marginLeft: '-35px', pointerEvents: 'none', paddingTop: 5, paddingBottom: 5, zIndex: 1000 }} />
               </div>
-              <div className={s.joinFieldBottom}>
-                <p>Previous Companies</p>
+              <div style={{ width: isSmallScreen3 ? '100%' : '50%' }}>
+                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Previous Companies</p>
                 <Input def={true} placeholder='Ex. EaglePro' />
               </div>
             </div>
-            <div className={s.submitWrapper}>
-              <p className={s.submitDescription}>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <button className={s.submitButton}>Submit</button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+              <p style={{ color: 'var(--sec-color)' }}>Lorem ipsum dolor sit amet. {!isSmallScreen2 && 'Porro eligendi atque ratione vero voluptas optio mollitia'}</p>
+              <button style={{ padding: '10px 40px', height: '40px', outline: 'none', border: 'none', borderRadius: '10px', backgroundColor: 'var(--btn-bg-color)', color: 'var(--main-color)', fontWeight: '900', cursor: 'pointer' }}>Submit</button>
             </div>
           </div>
           <h1 className={s.trustedTitle}>Trusted Perspectives</h1>
-          <p className={s.trustedDescription}>Lorem ipsum dolor sit amet consectetur, adipisicing elit</p>
+          <p className={s.trustedDescription}>Lorem ipsum dolor sit amet consectetur, adipis.</p>
           <Review />
         </div>
       </div>

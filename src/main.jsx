@@ -12,26 +12,33 @@ import Express from './screens/Express';
 import Home from './screens/Home';
 import { HeaderProvider } from './contexts/HeaderContext';
 import TrailerOverview from './screens/TrailerOverview';
+import Transport from './screens/Transport';
+import Order from './screens/Order';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
-      <Route path='/home' element={<Home />} />
-      <Route path='/express' element={<Express />} />
-      <Route path='/mechanics' element={<Mechanics />} />
-      <Route path='/trailers' element={<Trailers />} />
-      <Route path='/gourmet' element={<Gourmet />} />
-      <Route path='/invest' element={<Invest />} />
-      <Route path='/brokers' element={<Brokers />} />
-      <Route path='/trailers/:trailerId' element={<TrailerOverview />} />
+    <Route path='/EaglePro/' element={<App />}>
+      <Route path='/EaglePro/home' element={<Home />} />
+      <Route path='/EaglePro/express' element={<Express />} />
+      <Route path='/EaglePro/mechanics' element={<Mechanics />} />
+      <Route path='/EaglePro/trailers' element={<Trailers />} />
+      <Route path='/EaglePro/trailers/:trailerId' element={<TrailerOverview />} />
+      <Route path='/EaglePro/gourmet' element={<Gourmet />} />
+      <Route path='/EaglePro/gourmet/order' element={<Order />} />
+      <Route path='/EaglePro/invest' element={<Invest />} />
+      <Route path='/EaglePro/brokers' element={<Brokers />} />
+      <Route path='/EaglePro/brokers/transport/:transportInfo' element={<Transport />} />
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ErrorBoundary>
     <HeaderProvider>
       <RouterProvider router={router} />
     </HeaderProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 );

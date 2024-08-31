@@ -181,4 +181,29 @@
     padding: 0;
     margin-bottom: 20px;
   }
-  
+
+  @media only screen and (max-width: 600px) {
+    .introSection {
+      margin-left: 20px;
+      max-width: none;
+      margin-top: -150px;
+      margin-bottom: 100px;
+    }
+
+    .mainDescription {
+      max-width: 80%;
+      margin-top: 0;
+    }
+
+    .mainTitle {
+      font-size: 32px;
+    }
+    
+    .trailersSection {
+      padding: 0px 20px;
+    }
+
+    .trustedTitle {
+      font-size: 24px;
+    }
+  }
