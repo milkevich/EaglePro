@@ -225,7 +225,7 @@ const Brokers = () => {
     console.log('Navigating to transport page');
     if (!Array.isArray(vehicles) || vehicles.length === 0 || !distance) return;
     const carNames = vehicles.map(vehicle => vehicle.type).join('-');
-    const url = `/brokers/transport/${carNames}-${distance}mil`;
+    const url = `/EaglePro/brokers/transport/${carNames}-${distance}mil`;
 
     localStorage.setItem('transportData', JSON.stringify({ vehicles, distance, pickupCoords, pickupLocation, destinationCoords, destination, estimatedCost }));
     navigate(url);
@@ -240,7 +240,7 @@ const Brokers = () => {
       <ImgBgFade img={roadImg} />
       <div style={{ maxWidth: '1470px', margin: 'auto' }}>
         <div style={{ maxWidth: '450px', marginTop: isSmallScreen ? isSmallScreen6 ? '-150px' : '-200px' : '-250px', marginLeft: isSmallScreen ? '20px' : '40px', zIndex: 10000, position: "relative", marginBottom: isSmallScreen ? isSmallScreen6 ? '100px' : '150px' : '200px', opacity: position.top < -1 ? 0 : 1, transition: 'ease-in-out 0.3s all' }}>
-          <h1 style={{ fontSize: isSmallScreen ? '32px' : '54px', margin: 0, }}>EaglePro - Brokers</h1>
+          <h1 style={{ fontSize: isSmallScreen ? '32px' : '54px', margin: 0, }}>EaglePro Brokers</h1>
           <p style={{ marginTop: isSmallScreen6 ? '0px' : '10px', opacity: 0.65, fontSize: isSmallScreen ? '16px' : '18px' }}>{isSmallScreen6 ? 'Lorem ipsum dolor amet consectetur dolor.' : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, veniam minima, fuga tenetur sint'}</p>
         </div>
         <div
@@ -693,8 +693,6 @@ const Brokers = () => {
               )}
             </div>
           </div>
-          <h1 className={s.trustedTitle}>Trusted Perspectives</h1>
-          <p className={s.trustedDescription}>{isSmallScreen5 ? 'Lorem ipsum dolor sit amet consectetur' : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit'}</p>
           <Review />
         </div>
       </div>

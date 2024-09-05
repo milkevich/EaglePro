@@ -1,0 +1,57 @@
+.screensName {
+    cursor: pointer;
+    width: 100%; 
+    padding: 5px 10px; 
+    text-align: center; 
+    margin: 0;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out all;
+}
+
+.screensNameActive {
+    cursor: pointer;
+    width: 100%; 
+    padding: 5px 10px; 
+    text-align: center; 
+    margin: 0;
+    border-radius: 10px;
+    background-color: var(--btn-bg-color);
+}
+
+.screensName:hover {
+    background-color: var(--btn-bg-color);
+    opacity: 0.5;
+}
+
+p {
+    font-weight: 400;
+}
+
+.screensContainer {
+    margin-left: 86px; 
+    width: calc(100% - 104px); 
+    position: fixed; 
+    display: flex; 
+    justify-content: space-between; 
+    top: 83px; 
+    border-bottom: 1px solid var(--border-color); 
+    background-color: var(--main-bg-color); 
+    padding: 10px 10px; 
+    gap: 10px;
+}
+
+@media only screen and (max-width: 715px) {
+    .screensContainer {
+        margin-left: 80px; 
+        width: calc(100% - 104px); 
+        position: fixed; 
+        display: flex; 
+        justify-content: space-between; 
+        top: 83px; 
+        border-bottom: 1px solid var(--border-color); 
+        background-color: var(--main-bg-color); 
+        padding: 10px 10px; 
+        gap: 10px;
+        overflow-x: scroll;
+    }
+}

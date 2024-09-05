@@ -45,7 +45,7 @@ const Footer = () => {
                         <div>
                         <p style={{ color: 'var(--sec-color)', fontSize: '18px' }}>Navigate</p>
                         <div>
-                            <a href="/EaglePro/express">{!isSmallScreen && 'EaglePro - '}Express</a>
+                            <a href="/EaglePro/careers">{!isSmallScreen && 'EaglePro - '}Careers</a>
                             <br />
                             <a href="/EaglePro/mechanics">{!isSmallScreen && 'EaglePro - '}Mechanics</a>
                         </div>
@@ -73,7 +73,7 @@ const Footer = () => {
                             <div>
                                 <p style={{ color: 'var(--sec-color)', fontSize: '18px' }}>Navigate</p>
                                 <div>
-                                    <a href="/EaglePro/express">{!isSmallScreen && 'EaglePro - '}Express</a>
+                                    <a href="/EaglePro/careers">{!isSmallScreen && 'EaglePro - '}careers</a>
                                     <br />
                                     <a href="/EaglePro/mechanics">{!isSmallScreen && 'EaglePro - '}Mechanics</a>
                                 </div>
@@ -101,8 +101,8 @@ const Footer = () => {
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img style={{ maxWidth: '40px', marginRight: '20px' }} src={logoImg} alt="" />
                         <div>
-                            <p style={{ padding: 0, margin: 0 }}>Lorem ipsum dolor{!isSmallScreen && ' consectetur adipisicing elit.'}</p>
-                            <p style={{ padding: 0, margin: 0, color: 'var(--sec-color)' }}>Lorem ipsum dolor sit.</p>
+                            <p style={{ padding: 0, margin: 0, width: '100%', wordBreak: 'keep-all', wordWrap: 'normal', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', }}>EaglePro Alliance{!isSmallScreen && ' some text some text.'}</p>
+                            <p style={{ padding: 0, margin: 0, color: 'var(--sec-color)', width: '100%' }}>Ⓡ Lorem ipsum dolor sit.</p>
                         </div>
                     </div>
                     <div onClick={scrollToTop} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>

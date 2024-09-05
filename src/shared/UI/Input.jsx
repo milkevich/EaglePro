@@ -15,7 +15,10 @@ const Input = ({ pattern, maxLength, onChange, value, type, placeholder, def, ch
         outline: "none",
         border: "1px solid var(--border-color)",
         boxSizing: "border-box",
-        width: '100%'
+        width: '100%',
+        appearance: 'none', 
+        WebkitAppearance: 'none', 
+        MozAppearance: 'none',
     };
 
     const selectStyles = {
@@ -28,7 +31,10 @@ const Input = ({ pattern, maxLength, onChange, value, type, placeholder, def, ch
         top: "2px",
         outline: "none",
         backgroundColor: "var(--main-bg-color)",
-        width: '100%'
+        width: '100%',
+        appearance: 'none', 
+        WebkitAppearance: 'none', 
+        MozAppearance: 'none',
     }
 
     return (

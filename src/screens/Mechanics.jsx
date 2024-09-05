@@ -9,6 +9,8 @@ import { FaRegCalendar } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import Input from '../shared/UI/Input'
 import s from '../shared/Styles/Mechanics.module.scss'
+import centralLogo from '../assets/bilaldesigner-attachments/centrald.png'
+import { FaPhone } from "react-icons/fa6";
 
 const Mechanics = () => {
   const { position } = useContext(HeaderContext)
@@ -42,6 +44,7 @@ const Mechanics = () => {
         >
           <h1 className={s.title}>EaglePro Mechanics</h1>
           <p className={s.description}>Наш сервисный центр обслуживает траки, которые не принадлежат нашей компании. Мы рады предложить высокий уровень сервиса и профессионализма независимо от сотрудничества с нами.</p>
+          <a href='tel:+14454485170' style={{padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', backgroundColor: 'var(--btn-bg-color)', outline: 'none', border: 'none', borderRadius: '10px', color: 'var(--main-color)', maxWidth: '200px'}}><FaPhone/> + 1 (123) 456 7890</a>
         </div>
         <div
           className={s.pricesWrapper}
@@ -152,7 +155,7 @@ const Mechanics = () => {
               </div>
               <div>
                 <p className={s.locationLabel}>Mon - Fri</p>
-                <p>NN:NN am - NN:NN pm</p>
+                <p>8:00 am - 8:00 pm</p>
               </div>
               <div>
                 <p className={s.locationLabel}>Location</p>
@@ -179,8 +182,8 @@ const Mechanics = () => {
               <div>
                 <div>
                   <p className={s.locationLabel}>Mon - Fri</p>
-                  <p>NN:NN am - NN:NN pm</p>
-                </div>
+                  <p>8:00 am - 8:00 pm</p>
+                  </div>
                 <div style={{ marginTop: '40px' }}>
                   <p className={s.locationLabel}>In Construction</p>
                   <p>4 Larwin Rd, Cherry Hill, NJ</p>
@@ -198,8 +201,8 @@ const Mechanics = () => {
                 </div>
                 <div>
                   <p className={s.locationLabel}>Mon - Fri</p>
-                  <p>NN:NN am - NN:NN pm</p>
-                </div>
+                  <p>8:00 am - 8:00 pm</p>
+                  </div>
               </div>
               <div style={{display: 'block', marginTop: isSmallScreen3 ? '40px' : ''}}>
                 <div>
@@ -221,37 +224,39 @@ const Mechanics = () => {
             <p style={{margin: 0, color: 'var(--sec-color)'}}>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
             <div style={{ display: isSmallScreen ? 'block' : 'flex', justifyContent: 'stretch', gap: '20px', width: 'calc(100% - 20px)' }}>
               <div style={{ width: isSmallScreen ? 'calc(100% + 20px)' : '100%' }}>
-                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>First Name</p>
+                <p style={{color: 'var(--main-color)', marginBottom: '5px'}}>First Name</p>
                 <Input def={true} placeholder='Ex. John' />
               </div>
               <div style={{ width: isSmallScreen ? 'calc(100% + 20px)' : '100%' }}>
-                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Last Name</p>
+                <p style={{color: 'var(--main-color)', marginBottom: '5px'}}>Last Name</p>
                 <Input def={true} placeholder='Ex. Doe' />
               </div>
               <div style={{width: '100%', position: 'relative'}}>
-                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Date of birth</p>
-                <input type="date" style={{ padding: 19, outline: 'none', backgroundColor: "var(--main-bg-color)", color: "var(--main-color)", border: "1px solid var(--border-color)", borderRadius: 10, width: 'calc(100% - 20px)'}} />
+                <p style={{color: 'var(--main-color)', marginBottom: '5px'}}>Date of birth</p>
+                <input type="date" style={{ padding: '0px 19px', outline: 'none', backgroundColor: "var(--main-bg-color)", color: "var(--main-color)", border: "1px solid var(--border-color)", borderRadius: 10, width: 'calc(100% - 20px)', appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none', height: '56px'}} />
                 <FaRegCalendar color='var(--sec-color)' size={14} style={{ position: 'absolute', pointerEvents: 'none', right: 0, bottom: 23}} />
               </div>
             </div>
-            <div style={{ display: isSmallScreen3 ? 'block' : 'flex', justifyContent: 'stretch', gap: '20px' }}>
-              <div style={{ width: isSmallScreen3 ? '100%' : '50%' }}>
-                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Working experience</p>
+            <div style={{ display: isSmallScreen ? 'block' : 'flex', justifyContent: 'stretch', gap: '20px' }}>
+              <div style={{ width: isSmallScreen ? '100%' : 'calc(50% - 25px)' }}>
+                <p style={{color: 'var(--main-color)', marginBottom: '5px'}}>Working experience</p>
                 <Input select={true} placeholder='Ex. John' />
-                <IoIosArrowDown color='var(--sec-color)' style={{ backgroundColor: 'var(--main-bg-color)', paddingRight: '15px', position: 'absolute', marginTop: '20px', marginLeft: '-35px', pointerEvents: 'none', paddingTop: 5, paddingBottom: 5, zIndex: 1000 }} />
+                <IoIosArrowDown color='var(--sec-color)' style={{ backgroundColor: 'var(--main-bg-color)', paddingRight: '15px', position: 'absolute', marginTop: '18px', marginLeft: '-35px', pointerEvents: 'none', paddingTop: 5, paddingBottom: 5, zIndex: 1000 }} />
               </div>
-              <div style={{ width: isSmallScreen3 ? '100%' : '50%' }}>
-                <p style={{color: 'var(--sec-color)', marginBottom: '5px'}}>Previous Companies</p>
+              <div style={{ width: isSmallScreen ? '100%' : 'calc(50% - 25px)' }}>
+                <p style={{color: 'var(--main-color)', marginBottom: '5px'}}>Previous Companies</p>
                 <Input def={true} placeholder='Ex. EaglePro' />
+              </div>
+              <div style={{ width: isSmallScreen ? '100%' : '50%'  }}>
+                <p style={{color: 'var(--main-color)', marginBottom: '5px'}}>Contact Information</p>
+                <Input def={true} placeholder='Ex. +1 123 456 7890' />
               </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
-              <p style={{ color: 'var(--sec-color)' }}>Lorem ipsum dolor sit amet. {!isSmallScreen2 && 'Porro eligendi atque ratione vero voluptas optio mollitia'}</p>
-              <button style={{ padding: '10px 40px', height: '40px', outline: 'none', border: 'none', borderRadius: '10px', backgroundColor: 'var(--btn-bg-color)', color: 'var(--main-color)', fontWeight: '900', cursor: 'pointer' }}>Submit</button>
+            <p style={{ color: 'var(--sec-color)', display: isSmallScreen ? 'none' : 'block' }}>Lorem ipsum dolor sit amet. {!isSmallScreen2 && 'Porro eligendi atque ratione vero voluptas optio mollitia'}</p>
+            <button style={{ padding: '10px 40px', height: '40px', outline: 'none', border: 'none', borderRadius: '10px', backgroundColor: 'var(--btn-bg-color)', color: 'var(--main-color)', fontWeight: '900', cursor: 'pointer', width: isSmallScreen ? '100%' : '', marginBottom: isSmallScreen ? '15px' : '', marginTop: isSmallScreen ? '15px' : '' }}>Submit</button>
             </div>
           </div>
-          <h1 className={s.trustedTitle}>Trusted Perspectives</h1>
-          <p className={s.trustedDescription}>Lorem ipsum dolor sit amet consectetur, adipis.</p>
           <Review />
         </div>
       </div>

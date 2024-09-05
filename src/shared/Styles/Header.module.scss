@@ -53,6 +53,7 @@
 
 .logo {
     max-width: 117px;
+    cursor: pointer;
 }
 
 .headerButtonsContainer {
@@ -84,6 +85,26 @@
 
 .burgerMenu {
     display: none;
+}
+
+.langBtn {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.langBtn:hover {
+    background-color: var(--btn-bg-color);
+    scale: 1;
 }
 
 @media only screen and (max-width: 1050px) {

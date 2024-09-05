@@ -3,7 +3,7 @@ import { collection, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Divider from '@mui/material/Divider';
 import Button from '../shared/UI/Button';
-import { Breadcrumbs, Rating } from '@mui/material';
+import { Alert, Breadcrumbs, Fade, Grow, Rating, Slide } from '@mui/material';
 import { BsArrowLeft } from 'react-icons/bs';
 import logo from '../assets/bilaldesigner-attachments/eaglepro files 2.png'
 import { FiCalendar } from "react-icons/fi";
@@ -23,9 +23,11 @@ const Order = () => {
     const [alertShown, setAlertShown] = useState(false);
     const [alertMessage, setAlertMessage] = useState('Something went wrong');
     const [entryPopUpShown, setEntryPopUpShown] = useState(false);
+    const [entryPopUpShownAnim, setEntryPopUpShownAnim] = useState(false);
     const navigate = useNavigate()
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [isSmallScreen2, setIsSmallScreen2] = useState(false);
+    const [ratings, setRatings] = useState([]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -49,10 +51,15 @@ const Order = () => {
                 const menuSnapshot = await getDocs(menuCollection);
                 const menuList = menuSnapshot.docs.map((doc) => doc.data());
                 setMenuItems(menuList);
+
+                const calculatedRatings = menuList.map((_, index) => (index % 2 === 0 ? 5.0 : 4.9));
+                setRatings(calculatedRatings);
+
                 setEntryPopUpShown(true);
+                setEntryPopUpShownAnim(true)
                 window.scrollTo({
                     top: 0,
-                    behavior: 'smooth'
+                    behavior: 'smooth',
                 });
             } catch (error) {
                 console.error('Error fetching menu items:', error);
@@ -200,6 +207,64 @@ const Order = () => {
 
     return (
         <div>
+            {entryPopUpShown &&
+                <Fade in={entryPopUpShownAnim}>
+                    <div style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        width: '100vw',
+                        height: '100vh',
+                        zIndex: 100000000000000,
+                        margin: 0,
+                        padding: 0,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backdropFilter: 'blur(10px)'
+                    }}>
+                        <Slide direction='up' in={entryPopUpShownAnim}>
+                            <div style={{
+                                maxWidth: 350,
+                                width: '100%',
+                                height: 320,
+                                backgroundColor: "var(--main-bg-color)",
+                                borderRadius: 20,
+                                padding: 20,
+                                position: 'relative',
+                                border: '1px solid var(--border-color)'
+                            }}>
+                                <div>
+                                    <h3 style={{ margin: 0 }}>Как пользоваться:</h3>
+                                    <p style={{ color: 'var(--main-secondary-color)' }}>- Выберите не менее 5 блюд из каждой секции (5 завтраков, 5 обедов, 5 ужинов)</p>
+                                    <p style={{ color: 'var(--main-secondary-color)' }}>- Можно заказать несколько одинкавых блюд в каждой секции</p>
+                                    <p style={{ color: 'var(--main-secondary-color)' }}>- укажите свои имя и бортовой номер трака</p>
+                                </div>
+                                <div style={{ position: 'absolute', bottom: 16 }}>
+                                    <Button onClick={() => {
+                                        setEntryPopUpShownAnim(false)
+                                        setTimeout(() => {
+                                            setEntryPopUpShown(false)
+                                        }, 300);
+                                    }} borderRadius={10} width={350}>Продолжить</Button>
+                                </div>
+                            </div>
+                        </Slide>
+                    </div>
+                </Fade>
+
+
+            }
+            {alertShown &&
+                <div style={{ width: "100vw", margin: "auto", zIndex: 100000000, marginTop: 78, position: 'fixed' }}>
+                    <div style={{ width: '320px', margin: 'auto' }}>
+                        <Slide direction="down" in={alertShown} mountOnEnter unmountOnExit>
+                            <Alert sx={{ marginTop: "10px", position: "fixed", width: '290px' }} severity="error">{alertMessage}</Alert>
+                        </Slide>
+                    </div>
+                </div>
+            }
             <div style={{ padding: isSmallScreen ? '10px 20px' : '10px 60px', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 10000000, backgroundColor: 'var(--main-bg-color)' }}>
                 <div style={{ maxWidth: '1440px', margin: 'auto', display: 'flex', alignItems: 'center', gap: '20px', justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
@@ -260,7 +325,7 @@ const Order = () => {
                             </div>
                             <div style={{ maxWidth: '200px', margin: 'auto' }}>
                                 <button onClick={() => {
-                                    navigate('/gourmet');
+                                    navigate(-1);
                                     window.scrollTo({
                                         top: 0,
                                         behavior: 'smooth'
@@ -271,7 +336,7 @@ const Order = () => {
                     </div>
                 }
                 <div style={{ display: 'grid', width: isSmallScreen ? 'calc(100% - 40px)' : 'calc(100% - 200px)', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', margin: 'auto', marginBottom: 0, paddingBottom: 0, minHeight: '50vh', padding: isSmallScreen ? '0px 20px' : '' }}>
-                    {!showForm && !showConfirm && filteredMenuItems.map((item) => (
+                    {!showForm && !showConfirm && filteredMenuItems.map((item, index) => (
                         <div style={{ width: '100%', backgroundColor: 'var(--main-bg-color)', borderRadius: '20px', padding: '0px 0px', position: 'relative', border: '1px solid var(--border-color)' }} key={item.id}>
                             <div style={{ margin: 'auto', padding: 20, position: 'relative' }}>
                                 <div style={{ height: 200, overflow: 'hidden', borderRadius: 10, width: '100%' }}>
@@ -288,7 +353,7 @@ const Order = () => {
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <p>{item.dishName}</p>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--sec-color)' }}>
-                                        <span>4.8</span>
+                                        <span>{ratings[index].toFixed(1)}</span>
                                         <Rating size='small' max={1} name="read-only" defaultValue={0.5} value={0.5} readOnly />
                                     </div>
                                 </div>
@@ -328,7 +393,7 @@ const Order = () => {
                                     <div style={{ backgroundColor: 'var(--main-bg-color)', width: isSmallScreen ? 'calc(100% - 20px)' : '100%', padding: isSmallScreen ? '10px' : '15px 25px 25px 25px' }}>
                                         <h3 style={{ margin: 0, padding: 0 }}>Как вас зовут?<span style={{ color: "#bd2626" }}>*</span></h3>
                                         <p style={{ marginTop: 0, padding: 0, color: 'var(--main-secondary-color)' }}>Пожалуйста введите своё полное имя.</p>
-                                        <input style={{ padding: '15px 35px 15px 15px', width: isSmallScreen2 ? 'calc(100% - 60px)' : 'calc(100% - 30px)', border: '1px solid var(--border-color)', outline: 'none', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)' }} name="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Ex. John Doe" />
+                                        <input style={{ padding: '15px 35px 15px 15px', width: isSmallScreen2 ? 'calc(100% - 60px)' : 'calc(100% - 30px)', border: '1px solid var(--border-color)', outline: 'none', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)', color: 'var(--main-color)' }} name="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Ex. John Doe" />
                                     </div>
                                     <br />
                                 </>
@@ -336,7 +401,7 @@ const Order = () => {
                                     <div style={{ backgroundColor: 'var(--main-bg-color)', width: isSmallScreen ? 'calc(100% - 20px)' : '100%', padding: isSmallScreen ? '10px' : '15px 25px 25px 25px' }}>
                                         <h3 style={{ margin: 0, padding: 0 }}>Номер трака<span style={{ color: "#bd2626" }}>*</span></h3>
                                         <p style={{ marginTop: 0, padding: 0, color: 'var(--main-secondary-color)' }}>Пожалуйста введите номер своего трака.</p>
-                                        <input style={{ padding: '15px 35px 15px 15px', width: isSmallScreen2 ? 'calc(100% - 60px)' : '100%', border: '1px solid var(--border-color)', outline: 'none', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)' }} name="truckNum" value={truckNum} onChange={(e) => setTruckNum(e.target.value)} placeholder="Ex. VV-9, VD-12" />
+                                        <input style={{ padding: '15px 35px 15px 15px', width: isSmallScreen2 ? 'calc(100% - 60px)' : '100%', border: '1px solid var(--border-color)', outline: 'none', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)', color: 'var(--main-color)' }} name="truckNum" value={truckNum} onChange={(e) => setTruckNum(e.target.value)} placeholder="Ex. VV-9, VD-12" />
                                     </div>
                                     <br />
                                 </>
@@ -345,7 +410,7 @@ const Order = () => {
                                 <div style={{ backgroundColor: 'var(--main-bg-color)', width: isSmallScreen ? 'calc(100% - 20px)' : '100%', padding: isSmallScreen ? '10px' : '15px 25px 25px 25px', position: 'relative' }}>
                                     <h3 style={{ margin: 0, padding: 0 }}>Дата получения заказа<span style={{ color: "#bd2626" }}>*</span></h3>
                                     <p style={{ marginTop: 0, padding: 0, color: 'var(--main-secondary-color)' }}>Выберите дату получения заказа.</p>
-                                    <input style={{ padding: '15px', width: 'calc(100% - 30px)', border: '1px solid var(--border-color)', outline: 'none', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)', color: 'var(--main-color)' }} placeholder='mm/dd/yyyy' min={today} value={takeOutDate} onChange={(e) => setTakeOutDate(e.target.value)} type="date" />
+                                    <input style={{ padding: '0px 15px', width: 'calc(100% - 30px)', border: '1px solid var(--border-color)', outline: 'none', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)', color: 'var(--main-color)', height: '47.5px' }} placeholder='mm/dd/yyyy' min={today} value={takeOutDate} onChange={(e) => setTakeOutDate(e.target.value)} type="date" />
                                     <FiCalendar color='var(--sec-color)' style={{ position: 'absolute', right: isSmallScreen ? '25px' : 40, bottom: isSmallScreen ? '27.5px' : 42.5, pointerEvents: 'none', zIndex: 10000 }} />
                                 </div>
                                 <br />
@@ -450,6 +515,10 @@ const Order = () => {
                                 if (fullName !== '' && truckNum !== '' && takeOutDate !== '') {
                                     setShowConfirm(true)
                                     setShowForm(false)
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: 'smooth'
+                                    });
                                 }
                                 window.scrollTo({
                                     top: 0,

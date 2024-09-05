@@ -52,13 +52,11 @@ const Invest = () => {
             <textarea style={{padding: '15px 15px', maxWidth: 'calc(100% - 30px)', minWidth: 'calc(100% - 30px)', maxHeight: '60px', minHeight: '60px', outline: 'none', border: '1px solid var(--border-color)', borderRadius: '10px', backgroundColor: 'var(--main-bg-color)', color: 'var(--main-color)'}} placeholder='Leave a message for us' id=""></textarea>
           </div>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'end', justifyContent: 'space-between'}}>
-            <p style={{color: 'var(--sec-color)', marginBottom: '7px'}}>Lorem ipsum dolor sit amet, consectet.</p>
-          <button style={{ padding: '10px 40px', height: '40px', outline: 'none', border: 'none', borderRadius: '10px', backgroundColor: 'var(--btn-bg-color)', color: 'var(--main-color)', fontWeight: '900', cursor: 'pointer', marginTop: '20px' }}>Submit</button>
+            <p style={{color: 'var(--sec-color)', marginBottom: '7px', display: isSmallScreen2 ? 'none' : 'block'}}>Lorem ipsum dolor sit amet, consectet.</p>
+          <button style={{ padding: '10px 40px', height: '40px', outline: 'none', border: 'none', borderRadius: '10px', backgroundColor: 'var(--btn-bg-color)', color: 'var(--main-color)', fontWeight: '900', cursor: 'pointer', marginTop: '20px', width: isSmallScreen2 ? '100%' : '' }}>Submit</button>
           </div>
           </div>
       </div>
-      <h1 style={{margin: 0, marginTop: '-70px', fontSize: isSmallScreen2 ? '24px' : ''}}>Trusted Perspectives</h1>
-      <p style={{color: 'var(--sec-color)', margin: 0, marginBottom: '30px'}}>Lorem ipsum dolor sit amet consectetur.</p>
       <Review />
     </div>
   )

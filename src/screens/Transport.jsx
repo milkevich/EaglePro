@@ -114,7 +114,7 @@ const Transport = () => {
           <div style={{width: '100%', height: '1px', backgroundColor: 'var(--border-color)', marginTop: '20px'}}/>
         }
         <div style={{ padding: isSmallScreen2 ? '0px' : '20px 20px 20px 60px', width: '100%', marginTop: isSmallScreen2 ? '20px' : ''  }}>
-          <p style={{ margin: 0, color: 'var(--sec-color)', marginBottom: isSmallScreen3 ? '' : '' }}>Vehicles</p>
+          <p style={{ margin: 0, color: 'var(--sec-color)', marginBottom: isSmallScreen3 ? '' : '0px' }}>Vehicles</p>
           {Array.isArray(vehicles) && vehicles.length > 0 ? (
             vehicles.map((vehicle, index) => (
               <div key={index} style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -136,7 +136,7 @@ const Transport = () => {
       </div>
       <h3 style={{ margin: 0, marginLeft: isSmallScreen3 ? '20px' : '60px', marginTop: '40px' }}>Pick a date for transportation <span style={{ color: '#bd2626' }}>*</span></h3>
       <p style={{ margin: 0, color: 'var(--sec-color)', marginLeft: isSmallScreen3 ? '20px' : '60px', marginBottom: '20px' }}>Please fill out the fields below.</p>
-      <div style={{ display: isSmallScreen3 ? 'block' : 'flex', justifyContent: 'space-between', width: isSmallScreen3 ? 'calc(100% - 120px)' : 'calc(100% - 200px)', marginLeft: isSmallScreen3 ? '20px' : '60px', gap: '20px', padding: '10px 30px 30px 30px', border: '1px solid var(--border-color)', borderRadius: '20px' }}>
+      <div style={{ display: isSmallScreen3 ? 'block' : 'flex', justifyContent: 'space-between', width: isSmallScreen3 ? 'calc(100% - 100px)' : 'calc(100% - 185px)', marginLeft: isSmallScreen3 ? '20px' : '60px', gap: '20px', padding: '10px 30px 30px 30px', border: '1px solid var(--border-color)', borderRadius: '20px' }}>
         <div style={{ width: '100%', position: 'relative' }}>
           <p style={{ marginBottom: '7px', fontSize: '14px', color: 'var(--sec-color)' }}>Enter a pick-up date</p>
           <input
@@ -145,9 +145,13 @@ const Transport = () => {
               border: '1px solid var(--border-color)',
               outline: 'none',
               backgroundColor: 'var(--main-bg-color)',
-              padding: '20px',
+              padding: '0px 20px',
               borderRadius: '10px',
               color: 'var(--main-color)',
+              appearance: 'none', 
+              WebkitAppearance: 'none', 
+              MozAppearance: 'none',
+              height: '57.5px'
             }}
             type='date'
           />
@@ -161,9 +165,13 @@ const Transport = () => {
               border: '1px solid var(--border-color)',
               outline: 'none',
               backgroundColor: 'var(--main-bg-color)',
-              padding: '20px',
+              padding: '0px 20px',
               borderRadius: '10px',
               color: 'var(--main-color)',
+              appearance: 'none', 
+              WebkitAppearance: 'none', 
+              MozAppearance: 'none',
+              height: '57.5px'
             }}
             type='date'
           />

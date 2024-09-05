@@ -240,6 +240,43 @@
   margin-bottom: 20px;
 }
 
+.editContainer {
+  width: 100px; 
+  height: 30px; 
+  background-color: var(--main-bg-color); 
+  position: absolute; 
+  right: 0; 
+  margin-right: 20px;
+  margin-top: -50px; 
+  border-radius: 10px 10px 0px 0px; 
+  border: 1px solid var(--border-color); 
+  border-bottom: none; 
+  padding: 10px;
+  transition: ease-in-out 0.3s all;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.editContainer p {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px; 
+  margin: 0; 
+  margin-top: 0px; 
+  cursor: pointer; 
+  font-weight: 600; 
+  color: var(--sec-color); 
+  border-radius: 5px;
+  padding: 5px;
+  transition: ease-in-out 0.3s all;
+}
+
+.editContainer p:hover {
+  background-color: var(--btn-bg-color);
+  color: var(--main-color);
+}
+
 @media only screen and (max-width: 1000px) {
   .pricesList {
     display: grid;

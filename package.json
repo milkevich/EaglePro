@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/milkevich/EaglePro",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -21,6 +22,7 @@
     "axios": "^1.7.4",
     "geolib": "^3.3.4",
     "i": "^0.3.7",
+    "lucide-react": "^0.438.0",
     "mui": "^0.0.1",
     "npm": "^10.8.2",
     "react": "^18.3.1",

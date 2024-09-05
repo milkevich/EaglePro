@@ -3,12 +3,13 @@
     --main-color: #E0E0E0;
     --sec-bg-color: #121212;
     --sec-color: #626262;
-    --border-color: #1E1E1E;
-    --btn-bg-color: #101010;
+    --border-color: #282828;
+    --btn-bg-color: #191919;
     --border-radius: 10px;
 
     background-color: var(--main-bg-color);
     color: var(--main-color);
+    overflow-x: hidden;
 }
 
 a {
@@ -39,3 +40,21 @@ input:-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s;
   }
   
+
+input[type="date"]:focus::before,
+input[type="date"]:not(:placeholder-shown)::before {
+  content: "";
+}
+
+p {
+    font-size: 16px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  }

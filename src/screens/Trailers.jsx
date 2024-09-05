@@ -72,13 +72,11 @@ const Trailers = () => {
                     <p>Buy</p>
                     <p>{trailer.buy}</p>
                   </div>
-                  <button onClick={() => navigate(`/trailers/${trailer.id}`)} className={s.viewMoreButton}>View more</button>
+                  <button onClick={() => navigate(`/EaglePro/trailers/${trailer.id}`)} className={s.viewMoreButton}>View more</button>
                 </div>
               </div>
             ))}
           </div>
-          <h1 className={s.trustedTitle}>Trusted Perspectives</h1>
-          <p className={s.trustedDescription}>Lorem ipsum dolor sit amet consectetur, adipis.</p>
           <Review />
         </div>
       </div>
